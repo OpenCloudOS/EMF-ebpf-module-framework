@@ -33,7 +33,7 @@ libbpf:
 	@mkdir -p $(SYSROOT)
 	make -C lib/libbpf all
 
-bpftools:
+bpftools: libbpf
 	@mkdir -p $(SYSROOT)
 	make -C tools/bpftool all
 
