@@ -40,7 +40,7 @@ BPF_CFLAGS += -I$(or ,.) -Ikernel/ -I$(SYSROOT)/include \
 SKELS_CFLAGS := -g -O2 -Wall -I$(or ,.) -I$(SYSROOT)/include -I$(TOPDIR)/include/uapi
 BPF_LDFLAGS += $(EXTRA_LDFLAGS) -L$(SYSROOT)/lib
 
-LIBS = -lelf -lz $(LIBBPF)
+LIBS = $(LIBBPF) -lelf -lz 
 ifeq ($(USE_LIBCAP),y)
 LIBS += -lcap
 BPF_CFLAGS += -DUSE_LIBCAP

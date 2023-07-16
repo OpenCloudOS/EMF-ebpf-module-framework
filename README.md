@@ -21,6 +21,26 @@ EMF(ebpf-module-framework)是一个基eBPF的应用程序框架，主要用于�
 
 注：静态方式比如简单做成类似于C语言的.a即可。动态方式也可以在EMF当中使用dlopen之类的函数去读取动态eBPF模块当中对应的符号表（比如struct module符号，该符号位全局符号）。
 
+## 构建
+
+**依赖:**
+- libelf
+- zlib
+
+```
+$ git clone https://github.com/OpenCloudOS/EMF-ebpf-module-framework.git
+```
+**Ubuntu:**
+
+下载依赖包
+```
+$ sudo apt-get install -y  make clang zlib1g-dev llvm libelf-dev libbpf-dev libbpfcc-dev linux-tools-$(uname -r) linux-headers-$(uname -r)
+```
+编译
+```
+$ make -j$(nproc)
+```
+
 ## EMF模块介绍
 EMF支持两种加载模式：一、EMF模块静态链接；二、EMF模块动态加载。通常，在入口函数main启动后(core/emf.c)，EMF框架会去主动查找静态模块，分别去执行静态模块的初始化函数和加载函数；然后EMF才会去读取动态模块，并处理动态模块的初始化和加载函数。所以这里有一个优先级的关系，即静态模块的优先级永远高于动态模块的优先级。
 
